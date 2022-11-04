@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Outpass portal kpriet</title>
+    <link rel="stylesheet" href="wardenportal.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Sriracha&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+  </head>
+  <body>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+    <script src="/index.js"></script>
+
+    <script>
+      function update() {
+        var rollno = document.getElementById("rollno").value;
+        var status = document.getElementById("status").value;
+        var reasonfd = document.getElementById("reasonfd").value;
+
+        alert(status);
+        var updates = {
+          // email :email,
+          // password : password,
+          wardenapproval: status,
+          status: status,
+          reasonfdw: reasonfd,
+        };
+
+        database.ref("users/" + rollno).update(updates);
+
+        alert("updated");
+      }
+    </script>
+
+    <script>
+      var users = database.ref("/users");
+
+      users.on("value", function (snapshot) {
+        var users_list = snapshot.val();
+        let users_array = Object.keys(users_list);
+        var hod_approved_users = [];
+        console.log(users_array);
+        console.log(users_array.length);
+        for (let i = 0; i < users_array.length; i++) {
+
+          let a = users_list[users_array[i]].hodapproval;
+          let b = users_list[users_array[i]].status;
+          if ((a == "approved"|| a == "disapproved") && (b == "none" || b == "None")) {
+            hod_approved_users.push(users_array[i]);
+          }
+        }
+        console.log(hod_approved_users);
+
+
+        var up = document.getElementById("users_list");
+        var select = document.getElementById('rollno');
+        var elmts = hod_approved_users;
+        up.innerHTML = "Select from the following students " + ".<br> ["+ elmts +"]";
+
+        //main function
+        function get_choice()
+        {
+          for (var i = 0; i < elmts.length; i++)
+          {
+            var optn = elmts[i];
+            var el = document.createElement("option");
+            el.textContent = optn;
+            el.value = optn;
+            select.appendChild(el);
+
+          }
+          
+
+        }
+        get_choice();
+      });
+    </script>
+
+    <div class="container">
+      <h1>Welcome to KPRIET Outpass portal</h1>
+
+      <!-- Successfully submited message -->
+      <div class="form_container">
+        <p>Primary Details</p>
+
+        <div class="drop-down">
+          <p id="users_list"></p>          
+        </div>
+        
+       
+        <select id="rollno" class = "select"></select>
+          
+        <button class="btn" onclick="get()">Get details</button>
+
+        <div class="details">
+          Student Name :
+          <p id="name"></p>
+        </div>
+        <div class="details">
+          Roll No :
+          <p id="rollno2"></p>
+        </div>
+        <div class="details">
+          Branch :
+          <p id="branch"></p>
+        </div>
+        <div class="details">
+          Year :
+          <p id="year"></p>
+        </div>
+
+        <p>Contact Details</p>
+
+        <div class="details">
+          Phone Number :
+          <p id="phoneno"></p>
+        </div>
+        <div class="details">
+          Email :
+          <p id="email"></p>
+        </div>
+        <div class="details">
+          Parent's Phone Number :
+          <p id="parentphoneno"></p>
+        </div>
+
+        <p>Outpass Details</p>
+
+        <div class="details">
+          Parent's Phone Number :
+          <p id="hostelname"></p>
+        </div>
+        <div class="details">
+          From date :
+          <p id="fdate"></p>
+        </div>
+        <div class="details">
+          To date :
+          <p id="tdate"></p>
+        </div>
+        <div class="details">
+          Mode :
+          <p id="mode"></p>
+        </div>
+        <div class="details">
+          Reason :
+          <p id="letter"></p>
+        </div>
+        <div class="details">
+          Queries :
+          <p id="queries"></p>
+        </div>
+        <div class="details">
+          Hod approval :
+          <p id="hodapproval"></p>
+        </div>
+        <div class="details">
+          Reason for rejection :
+          <p id="reasonfdh"></p>
+        </div>
+
+        <div class="inp">
+          <label for="status">
+            Please enter the result and press enter button</label
+          >
+          <select name="status" id="status" class = "select">
+            <option value="none">select</option>
+            <option value="approved">approve</option>
+            <option value="disapproved">disapprove</option>
+          </select>
+
+          <button class="btn" id="approve" onclick="status()">enter</button>
+        </div>
+
+        <textarea
+          id="reasonfd"
+          cols="30"
+          rows="10"
+          placeholder="Reason for disapproval"
+        ></textarea>
+      </div>
+      <button class="btn" onclick="sendEmail();">Send mail to student</button>
+
+      <a href="wardenlogin.html"> <button class="btn">Back to login</button></a>
+    </div>
+  </body>
+</html>

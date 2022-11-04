@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Outpass portal kpriet</title>
+    <link rel="stylesheet" href="studentportal.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Sriracha&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+  </head>
+  <body>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+    <script src="/index.js"></script>
+
+
+    <div class="container">
+      <h1>Welcome to <span id = "kpriet">KPRIET</span> Outpass portal</h1>
+      <p>
+        Submit this form after filling your details to apply for the outpass
+      </p>
+
+      <div class="form_container">
+        <p>Primary Details</p>
+
+        <input type="name" id="name" placeholder="Enter your name" required />
+        <input
+          type="text"
+          id="rollno"
+          placeholder="Enter your rollno"
+          required
+        />
+        <input type="number" id="age" placeholder="Enter your age" required />
+        <input type="email" id="email" placeholder="Enter your mail" required />
+        <div class="inpd">
+          <label for="dob">Enter your Date of Birth</label>
+          <input type="date" id="dob" placeholder="" />
+        </div>
+        <input
+          type="text"
+          id="branch"
+          placeholder="Enter your Branch name eg. CSE"
+        />
+        <input type="number" id="year" placeholder="Enter your current year" />
+
+        <p>Contact Details</p>
+
+        <input
+          type="text"
+          id="phoneno"
+          placeholder="Enter your phone number"
+          required
+        />
+
+        <div class="inp">
+          <input
+            type="text"
+            id="parentphoneno"
+            placeholder="Enter your parent's/ Guardian's phone number"
+            required
+          />
+        </div>
+
+        <p>Outpass Details</p>
+
+        <div class="inp">
+          <input
+            type="text"
+            id="hostelname"
+            placeholder="Enter your hostel name"
+            required
+          />
+        </div>
+
+        <div class="inpd">
+          <label for="fdate">From Date</label>
+          <input type="date" id="fdate" placeholder="Start date" required />
+        </div>
+
+        <div class="inpd">
+          <label for="tdate">To Date</label>
+          <input type="date" id="tdate" placeholder="Arrival date" required />
+        </div>
+        <input type="text" id="mode" placeholder="Mode of travel" />
+
+        <div class="inp boxform">
+          <textarea
+            required
+            name="letter"
+            id="letter"
+            cols="30"
+            rows="10"
+            placeholder="Reason for Outpass (min 50 words)"
+          ></textarea>
+        </div>
+
+        <div class="inp boxform">
+          <textarea
+            name="queries"
+            id="queries"
+            cols="30"
+            rows="10"
+            placeholder="Enter any other queries or information here"
+          ></textarea>
+        </div>
+
+        <button class="btn" onclick="submit()">Submit</button>
+        <button class="btn" onclick="notifyHOD()">Notify Warden</button>
+        <button class="btn" onclick="notifyWD()">Notify HOD</button>
+        
+        <a href="stulogin.html">
+          <button class="btn" onclick="signOut()">Back to login</button></a
+        >
+
+      </div>
+    </div>
+  </body>
+</html>

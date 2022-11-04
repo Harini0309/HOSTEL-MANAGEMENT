@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="    viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="stulogin.css" />
+    <script>
+      function mainpage() {
+        window.location.href = "/index.html";
+      }
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-auth.js"></script>
+    <script src="stulogin.js"></script>
+
+    <title>Login for outpass</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>OUTPASS LOGIN</h1>
+
+      <div class="form_container">
+        <b>Username</b>
+        <input
+          type="text"
+          placeholder="Username Please"
+          name="username"
+          required
+          id="email"
+        />
+
+        <b>Password</b>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          name="password"
+          required
+          id="password"
+        />
+
+        <!-- <button type="submit" class="button">Login</button> -->
+        <div class="btn">
+          <button onclick="signUp()" id="signUp">SignUp</button>
+          <button onclick="signIn()" id="signIn">SignIn</button>
+          <button onclick="signOut(1)" id="signOut">SignOut</button>
+          <button onclick="mainpage()" id="main">Go to main gateway</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
